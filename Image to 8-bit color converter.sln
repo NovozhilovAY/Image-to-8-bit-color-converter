@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image to 8-bit color converter", "Image to 8-bit color converter\Image to 8-bit color converter.csproj", "{31F8BB56-4AB3-4690-ABC3-9A183BD2965B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31F8BB56-4AB3-4690-ABC3-9A183BD2965B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F8BB56-4AB3-4690-ABC3-9A183BD2965B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F8BB56-4AB3-4690-ABC3-9A183BD2965B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F8BB56-4AB3-4690-ABC3-9A183BD2965B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC3407EE-638D-4EDA-B36A-FFEE2B096D6F}
+	EndGlobalSection
+EndGlobal
