@@ -35,5 +35,18 @@ namespace Image_to_8_bit_color_converter
                 }
             }
         }
+
+        protected int[] split_range_of_values(int first,int last, int num_parts)
+        {
+            int[] res = new int[num_parts];
+            double cur_val = (double)first;
+            double step = (last - first) / (double)(num_parts - 1);
+            for(int i = 0;i<num_parts;i++)
+            {
+                res[i] = (int)Math.Round(cur_val);
+                cur_val += step;
+            }
+            return res;
+        }
     }
 }

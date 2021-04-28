@@ -16,5 +16,10 @@ namespace Image_to_8_bit_color_converter
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
