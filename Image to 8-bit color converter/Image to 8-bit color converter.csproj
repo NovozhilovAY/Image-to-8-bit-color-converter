@@ -51,6 +51,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageToPaletteConverter.cs" />
     <Compile Include="Palette.cs" />
     <Compile Include="Palette12bit.cs" />
     <Compile Include="Palette16bit.cs" />
