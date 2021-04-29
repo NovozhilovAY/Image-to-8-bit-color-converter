@@ -19,7 +19,7 @@ namespace Image_to_8_bit_color_converter
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            Palette8bit p= new Palette8bit();
         }
     }
 }
