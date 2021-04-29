@@ -9,7 +9,7 @@ namespace Image_to_8_bit_color_converter
 {
     class Palette
     {
-        private List<Color> colors;
+        protected List<Color> colors;
 
         protected int[] R_vals;
         protected int[] G_vals;
