@@ -23,13 +23,13 @@ namespace Image_to_8_bit_color_converter
                     {
                         if(i >= image.Height)
                         {
-                            continue;
+                            break;
                         }
                         for(int j = x; j < x + p_size; j++)
                         {
                            if(j >= image.Width)
                            {
-                                continue;
+                                break;
                            }
                            one_pixel_colors.Add(image.GetPixel(j, i));
                         }
@@ -39,13 +39,13 @@ namespace Image_to_8_bit_color_converter
                     {
                         if (i >= image.Height)
                         {
-                            continue;
+                            break;
                         }
                         for (int j = x; j < x + p_size; j++)
                         {
                             if (j >= image.Width)
                             {
-                                continue;
+                                break;
                             }
                             res.SetPixel(j, i,new_color);
                         }
