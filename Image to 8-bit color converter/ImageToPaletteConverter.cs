@@ -18,7 +18,7 @@ namespace Image_to_8_bit_color_converter
             colors = _palette.get_colors();
             tasks = new List<Task>();
             rows_of_colors = new List<List<Color>>(image.Height);
-            for(int i = 0;i<image.Width;i++)
+            for (int i = 0; i < image.Width; i++)
             {
                 rows_of_colors.Add(new List<Color>(image.Width));
             }
@@ -30,12 +30,12 @@ namespace Image_to_8_bit_color_converter
                     rows_of_colors[i].Add(image.GetPixel(j, i));
                 }
             }
-            for(int i = 0; i < rows_of_colors.Count;i++)
+            for (int i = 0; i < rows_of_colors.Count; i++)
             {
                 int cur_i = i;
                 Task t = Task.Run(() => Process_row(rows_of_colors[cur_i]));
                 tasks.Add(t);
-                if(tasks.Count == Environment.ProcessorCount)
+                if (tasks.Count == Environment.ProcessorCount)
                 {
                     Task.WaitAll(tasks.ToArray());
                     tasks.Clear();
@@ -55,7 +55,7 @@ namespace Image_to_8_bit_color_converter
             Color new_prew_color = new Color();
             for (int i = 0; i < row.Count; i++)
             {
-                if(is_init && prew_color == row[i])
+                if (is_init && prew_color == row[i])
                 {
                     row[i] = new_prew_color;
                 }
@@ -71,9 +71,9 @@ namespace Image_to_8_bit_color_converter
 
         private void Set_new_colors(Bitmap image)
         {
-            for(int y = 0;y < image.Height;y++)
+            for (int y = 0; y < image.Height; y++)
             {
-                for(int x = 0;x<image.Width;x++)
+                for (int x = 0; x < image.Width; x++)
                 {
                     image.SetPixel(x, y, rows_of_colors[y][x]);
                 }

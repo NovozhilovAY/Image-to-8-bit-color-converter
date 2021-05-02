@@ -12,7 +12,7 @@ namespace Image_to_8_bit_color_converter
 {
     public partial class Form1 : Form
     {
-        const int MAX_PIXEL_SIZE = 4;
+        const int MAX_PIXEL_SIZE = 20;
         private Palette p8b;
         private Palette p12b;
         private Palette p16b;
@@ -58,7 +58,7 @@ namespace Image_to_8_bit_color_converter
         private void button1_Click(object sender, EventArgs e)
         {
             ImageToPaletteConverter converter = new ImageToPaletteConverter();
-            converter.convert(image, p8b);    
+            converter.convert(image, p12b);    
             pictureBox1.Image = image;
         }
 
