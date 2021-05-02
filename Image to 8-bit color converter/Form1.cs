@@ -27,7 +27,7 @@ namespace Image_to_8_bit_color_converter
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            image = (Bitmap)Image.FromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\test.jpg");
+            image = (Bitmap)Image.FromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\test.png");
             images = new Bitmap[MAX_PIXEL_SIZE];
             images[0] = image;
             tasks = new List<Task>();
