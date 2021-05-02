@@ -50,9 +50,22 @@ namespace Image_to_8_bit_color_converter
 
         void Process_row(List<Color> row)
         {
+            bool is_init = false;
+            Color prew_color = new Color();
+            Color new_prew_color = new Color();
             for (int i = 0; i < row.Count; i++)
             {
-                row[i] = Get_similar_color_from_palette(row[i]);
+                if(is_init && prew_color == row[i])
+                {
+                    row[i] = new_prew_color;
+                }
+                else
+                {
+                    is_init = true;
+                    prew_color = row[i];
+                    row[i] = Get_similar_color_from_palette(row[i]);
+                    new_prew_color = row[i];
+                }
             }
         }
 
