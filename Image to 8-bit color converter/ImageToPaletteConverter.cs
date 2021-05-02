@@ -13,23 +13,11 @@ namespace Image_to_8_bit_color_converter
         private List<List<Color>> rows_of_colors;
         private List<Color> colors;
         private List<Task> tasks;
-        public void convert(Bitmap image, Palette _palette)
+        public void Convert(Bitmap image, Palette _palette)
         {
             colors = _palette.get_colors();
+            Fill_rows_of_colors(image);
             tasks = new List<Task>();
-            rows_of_colors = new List<List<Color>>(image.Height);
-            for (int i = 0; i < image.Width; i++)
-            {
-                rows_of_colors.Add(new List<Color>(image.Width));
-            }
-            for (int i = 0; i < image.Height; i++)
-            {
-                rows_of_colors[i] = new List<Color>(image.Width);
-                for (int j = 0; j < image.Width; j++)
-                {
-                    rows_of_colors[i].Add(image.GetPixel(j, i));
-                }
-            }
             for (int i = 0; i < rows_of_colors.Count; i++)
             {
                 int cur_i = i;
@@ -47,8 +35,23 @@ namespace Image_to_8_bit_color_converter
             }
             Set_new_colors(image);
         }
-
-        void Process_row(List<Color> row)
+        private void Fill_rows_of_colors(Bitmap image)
+        {
+            rows_of_colors = new List<List<Color>>(image.Height);
+            for (int i = 0; i < image.Width; i++)
+            {
+                rows_of_colors.Add(new List<Color>(image.Width));
+            }
+            for (int i = 0; i < image.Height; i++)
+            {
+                rows_of_colors[i] = new List<Color>(image.Width);
+                for (int j = 0; j < image.Width; j++)
+                {
+                    rows_of_colors[i].Add(image.GetPixel(j, i));
+                }
+            }
+        }
+        private void Process_row(List<Color> row)
         {
             bool is_init = false;
             Color prew_color = new Color();

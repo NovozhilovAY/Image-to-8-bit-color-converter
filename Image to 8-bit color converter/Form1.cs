@@ -12,7 +12,7 @@ namespace Image_to_8_bit_color_converter
 {
     public partial class Form1 : Form
     {
-        const int MAX_PIXEL_SIZE = 20;
+        const int MAX_PIXEL_SIZE = 16;
         private Palette p8b;
         private Palette p12b;
         private Palette p16b;
@@ -53,12 +53,13 @@ namespace Image_to_8_bit_color_converter
             p12b = new Palette12bit();
             p16b = new Palette16bit();
             pictureBox1.Image = image;
+            trackBar1.Maximum = MAX_PIXEL_SIZE;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             ImageToPaletteConverter converter = new ImageToPaletteConverter();
-            converter.convert(image, p12b);    
+            converter.Convert(image, p8b);    
             pictureBox1.Image = image;
         }
 
@@ -66,7 +67,6 @@ namespace Image_to_8_bit_color_converter
         {
             pictureBox1.Image = images[trackBar1.Value-1];
             image = images[trackBar1.Value - 1];
-
         }
 
         public void pixelize_image(Bitmap orig,int pos, int pixel_size)
