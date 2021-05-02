@@ -16,31 +16,35 @@ namespace Image_to_8_bit_color_converter
         public void convert(Bitmap image, Palette _palette)
         {
             colors = _palette.get_colors();
-
-            //for (int i = 0; i < image.Height; i++)
-            //{
-            //    for (int j = 0; j < image.Width; j++)
-            //    {
-            //        Color new_color = get_similar_color_from_palette(image.GetPixel(j, i));
-            //        image.SetPixel(j, i, new_color);
-            //    }
-            //}
+            tasks = new List<Task>();
+            rows_of_colors = new List<List<Color>>(image.Height);
+            for(int i = 0;i<image.Width;i++)
+            {
+                rows_of_colors.Add(new List<Color>(image.Width));
+            }
             for (int i = 0; i < image.Height; i++)
             {
-                rows_of_colors[i] = new List<Color>();
+                rows_of_colors[i] = new List<Color>(image.Width);
                 for (int j = 0; j < image.Width; j++)
                 {
                     rows_of_colors[i].Add(image.GetPixel(j, i));
                 }
             }
-
             for(int i = 0; i < rows_of_colors.Count;i++)
             {
                 int cur_i = i;
-                Task t = new Task(() => Process_row(rows_of_colors[cur_i]));
+                Task t = Task.Run(() => Process_row(rows_of_colors[cur_i]));
                 tasks.Add(t);
+                if(tasks.Count == Environment.ProcessorCount)
+                {
+                    Task.WaitAll(tasks.ToArray());
+                    tasks.Clear();
+                }
             }
-            Task.WaitAll(tasks.ToArray());
+            if (tasks.Count != 0)
+            {
+                Task.WaitAll(tasks.ToArray());
+            }
             Set_new_colors(image);
         }
 
