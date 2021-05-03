@@ -38,7 +38,7 @@ namespace Image_to_8_bit_color_converter
         private void Fill_rows_of_colors(Bitmap image)
         {
             rows_of_colors = new List<List<Color>>(image.Height);
-            for (int i = 0; i < image.Width; i++)
+            for (int i = 0; i < image.Height; i++)
             {
                 rows_of_colors.Add(new List<Color>(image.Width));
             }
