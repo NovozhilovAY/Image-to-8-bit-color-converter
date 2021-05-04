@@ -16,6 +16,10 @@ namespace Image_to_8_bit_color_converter
         private Palette p8b;
         private Palette p12b;
         private Palette p16b;
+        private Palette p6b;
+        private Palette paletteFromFile;
+        private Palette paletteFromFile2;
+        private Palette paletteFromFile3;
         private Pixelizer pixelizer;
         private List<Task> tasks; 
         private Bitmap[] images;
@@ -27,39 +31,25 @@ namespace Image_to_8_bit_color_converter
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            image = (Bitmap)Image.FromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\test.png");
             images = new Bitmap[MAX_PIXEL_SIZE];
-            images[0] = image;
             tasks = new List<Task>();
             pixelizer = new Pixelizer();
-            for (int i = 1; i < MAX_PIXEL_SIZE; i++)
-            {
-                int localI = i;
-                Bitmap tmp = new Bitmap(image);
-                Task t = Task.Run(() => pixelize_image(tmp, localI, localI + 1));
-                tasks.Add(t);
-                if (tasks.Count == Environment.ProcessorCount)
-                {
-                    Task.WaitAll(tasks.ToArray());
-                    tasks.Clear();
-                }
-            }
-            if(tasks.Count != 0)
-            {
-                Task.WaitAll(tasks.ToArray());
-            }
-            
             p8b = new Palette8bit();
             p12b = new Palette12bit();
             p16b = new Palette16bit();
-            pictureBox1.Image = image;
+            p6b = new Palette6bit();
+            paletteFromFile = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\ufo32.png");
+            paletteFromFile2 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\ufo128.png");
+            paletteFromFile3 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\wave.jpg");
             trackBar1.Maximum = MAX_PIXEL_SIZE;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            BrightnessUpFilter bf = new BrightnessUpFilter(); 
             ImageToPaletteConverter converter = new ImageToPaletteConverter();
-            converter.Convert(image, p8b);    
+            //bf.Process(image);
+            converter.Convert(image, paletteFromFile);    
             pictureBox1.Image = image;
         }
 
@@ -72,6 +62,36 @@ namespace Image_to_8_bit_color_converter
         public void pixelize_image(Bitmap orig,int pos, int pixel_size)
         {
            images[pos] = pixelizer.process(orig, pixel_size); 
+        }
+
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog d = new OpenFileDialog();
+            d.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            if (d.ShowDialog() == DialogResult.OK)
+            {
+                image = (Bitmap)Image.FromFile(d.FileName);
+                images[0] = image;
+                for (int i = 1; i < MAX_PIXEL_SIZE; i++)
+                {
+                    int localI = i;
+                    Bitmap tmp = new Bitmap(image);
+                    Task t = Task.Run(() => pixelize_image(tmp, localI, localI + 1));
+                    tasks.Add(t);
+                    if (tasks.Count == Environment.ProcessorCount)
+                    {
+                        Task.WaitAll(tasks.ToArray());
+                        tasks.Clear();
+                    }
+                }
+                if (tasks.Count != 0)
+                {
+                    Task.WaitAll(tasks.ToArray());
+                    tasks.Clear();
+                }
+                pictureBox1.Image = image;
+                trackBar1.Value = 1;
+            }
         }
     }
 }

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrightnessUpFilter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,7 +56,9 @@
     <Compile Include="Palette.cs" />
     <Compile Include="Palette12bit.cs" />
     <Compile Include="Palette16bit.cs" />
+    <Compile Include="Palette6bit.cs" />
     <Compile Include="Palette8bit.cs" />
+    <Compile Include="PaletteFromFile.cs" />
     <Compile Include="Pixelizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
