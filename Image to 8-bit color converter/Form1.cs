@@ -123,5 +123,12 @@ namespace Image_to_8_bit_color_converter
             button1.Enabled = true;
             trackBar1.Enabled = true;
         }
+
+        private void Enable_GUI()
+        {
+            menuStrip2.Enabled = true;
+            button1.Enabled = true;
+            trackBar1.Enabled = true;
+        }
     }
 }
