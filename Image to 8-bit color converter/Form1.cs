@@ -25,7 +25,6 @@ namespace Image_to_8_bit_color_converter
         private List<Task> tasks; 
         private Bitmap[] images;
         private Bitmap cur_image;
-        private BackgroundWorker worker;
         private bool IsImageLoaded;
 
         public Form1()
@@ -77,8 +76,8 @@ namespace Image_to_8_bit_color_converter
             {
                 cur_image = (Bitmap)Image.FromFile(d.FileName);
                 images[0] = cur_image;
+                Disable_GUI();
                 backgroundWorker1.RunWorkerAsync();
-                
             }
         }
 
@@ -118,10 +117,8 @@ namespace Image_to_8_bit_color_converter
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar1.Value = 0;
-            IsImageLoaded = true;
             trackBar1.Value = 1;
-            button1.Enabled = true;
-            trackBar1.Enabled = true;
+            Enable_GUI();
         }
 
         private void Enable_GUI()
@@ -129,6 +126,13 @@ namespace Image_to_8_bit_color_converter
             menuStrip2.Enabled = true;
             button1.Enabled = true;
             trackBar1.Enabled = true;
+        }
+
+        private void Disable_GUI()
+        {
+            menuStrip2.Enabled = false;
+            button1.Enabled = false;
+            trackBar1.Enabled = false;
         }
     }
 }
