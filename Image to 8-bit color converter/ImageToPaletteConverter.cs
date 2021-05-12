@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -41,6 +42,33 @@ namespace Image_to_8_bit_color_converter
             }
             Set_new_colors(image);
         }
+        public void Convert(Bitmap image, Palette _palette, BackgroundWorker bw)
+        {
+            colors = _palette.get_colors();
+            R_vals = _palette.Get_R();
+            G_vals = _palette.Get_G();
+            B_vals = _palette.Get_B();
+            Fill_rows_of_colors(image);
+            tasks = new List<Task>();
+            for (int i = 0; i < rows_of_colors.Count; i++)
+            {
+                int cur_i = i;
+                bw.ReportProgress((int)Calc_percent(i, rows_of_colors.Count));
+                Task t = Task.Run(() => Process_row(rows_of_colors[cur_i]));
+                tasks.Add(t);
+                if (tasks.Count == Environment.ProcessorCount)
+                {
+                    Task.WaitAll(tasks.ToArray());
+                    tasks.Clear();
+                }
+            }
+            if (tasks.Count != 0)
+            {
+                Task.WaitAll(tasks.ToArray());
+            }
+            Set_new_colors(image);
+        }
+
         private void Fill_rows_of_colors(Bitmap image)
         {
             rows_of_colors = new List<List<Color>>(image.Height);
@@ -135,5 +163,10 @@ namespace Image_to_8_bit_color_converter
         //    new_color = colors[min_ind];
         //    return new_color;
         //}
+        private double Calc_percent(int part, int val)
+        {
+            return part / (val / 100.0);
+        }
     }
+    
 }
