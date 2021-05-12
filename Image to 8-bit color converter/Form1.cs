@@ -26,7 +26,7 @@ namespace Image_to_8_bit_color_converter
         private Bitmap[] images;
         private Bitmap cur_image;
         private bool IsImageLoaded;
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -51,11 +51,7 @@ namespace Image_to_8_bit_color_converter
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BrightnessUpFilter bf = new BrightnessUpFilter(); 
-            ImageToPaletteConverter converter = new ImageToPaletteConverter();
-            //bf.Process(image);
-            converter.Convert(cur_image, paletteFromFile3);    
-            pictureBox1.Image = cur_image;
+            backgroundWorker2.RunWorkerAsync();
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -133,6 +129,23 @@ namespace Image_to_8_bit_color_converter
             menuStrip2.Enabled = false;
             button1.Enabled = false;
             trackBar1.Enabled = false;
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ImageToPaletteConverter converter = new ImageToPaletteConverter();
+            converter.Convert(cur_image, paletteFromFile3,backgroundWorker2);
+        }
+
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            pictureBox1.Image = cur_image;
+            progressBar1.Value = 0;
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
         }
     }
 }
