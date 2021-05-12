@@ -43,7 +43,7 @@ namespace Image_to_8_bit_color_converter
             p6b = new Palette6bit();
             //paletteFromFile = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\ufo32.png");
             //paletteFromFile2 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\ufo128.png");
-            //paletteFromFile3 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\wave.jpg");
+            paletteFromFile3 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\test images\\wave.jpg");
             trackBar1.Maximum = MAX_PIXEL_SIZE;
             button1.Enabled = false;
             trackBar1.Enabled = false;
@@ -54,7 +54,7 @@ namespace Image_to_8_bit_color_converter
             BrightnessUpFilter bf = new BrightnessUpFilter(); 
             ImageToPaletteConverter converter = new ImageToPaletteConverter();
             //bf.Process(image);
-            converter.Convert(cur_image, p12b);    
+            converter.Convert(cur_image, paletteFromFile3);    
             pictureBox1.Image = cur_image;
         }
 
