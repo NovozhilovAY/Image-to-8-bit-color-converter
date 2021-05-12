@@ -19,7 +19,18 @@ namespace Image_to_8_bit_color_converter
         {
             return colors;
         }
-
+        public int[] Get_R()
+        {
+            return R_vals;
+        }
+        public int[] Get_G()
+        {
+            return G_vals;
+        }
+        public int[] Get_B()
+        {
+            return B_vals;
+        }
         protected void fill_colors()
         {
             for(int r = 0; r < R_vals.Length; r++)
