@@ -54,7 +54,7 @@ namespace Image_to_8_bit_color_converter
             BrightnessUpFilter bf = new BrightnessUpFilter(); 
             ImageToPaletteConverter converter = new ImageToPaletteConverter();
             //bf.Process(image);
-            converter.Convert(cur_image, p8b);    
+            converter.Convert(cur_image, p12b);    
             pictureBox1.Image = cur_image;
         }
 

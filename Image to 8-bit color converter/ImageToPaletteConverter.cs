@@ -12,10 +12,16 @@ namespace Image_to_8_bit_color_converter
     {
         private List<List<Color>> rows_of_colors;
         private List<Color> colors;
+        private int[] R_vals;
+        private int[] G_vals;
+        private int[] B_vals;
         private List<Task> tasks;
         public void Convert(Bitmap image, Palette _palette)
         {
             colors = _palette.get_colors();
+            R_vals = _palette.Get_R();
+            G_vals = _palette.Get_G();
+            B_vals = _palette.Get_B();
             Fill_rows_of_colors(image);
             tasks = new List<Task>();
             for (int i = 0; i < rows_of_colors.Count; i++)
@@ -85,23 +91,49 @@ namespace Image_to_8_bit_color_converter
 
         private Color Get_similar_color_from_palette(Color color)
         {
-            Color new_color;
             int R = color.R;
             int G = color.G;
             int B = color.B;
+            int new_R = Get_most_similar_number(R, R_vals);
+            int new_G = Get_most_similar_number(G, G_vals);
+            int new_B = Get_most_similar_number(B, B_vals);
+            return Color.FromArgb(new_R,new_G,new_B);
+        }
+
+        private int Get_most_similar_number(int val, int[] arr)
+        {
             int min_dif = int.MaxValue;
             int min_ind = 0;
-            for (int i = 0; i < colors.Count; i++)
+            for(int i = 0; i<arr.Length; ++i)
             {
-                int dif = Math.Abs(colors[i].R - R) + Math.Abs(colors[i].G - G) + Math.Abs(colors[i].B - B);
+                int dif = Math.Abs(arr[i] - val);
                 if (dif < min_dif)
                 {
                     min_dif = dif;
                     min_ind = i;
                 }
             }
-            new_color = colors[min_ind];
-            return new_color;
+            return arr[min_ind];
         }
+        //private Color Get_similar_color_from_palette(Color color)
+        //{
+        //    Color new_color;
+        //    int R = color.R;
+        //    int G = color.G;
+        //    int B = color.B;
+        //    int min_dif = int.MaxValue;
+        //    int min_ind = 0;
+        //    for (int i = 0; i < colors.Count; i++)
+        //    {
+        //        int dif = Math.Abs(colors[i].R - R) + Math.Abs(colors[i].G - G) + Math.Abs(colors[i].B - B);
+        //        if (dif < min_dif)
+        //        {
+        //            min_dif = dif;
+        //            min_ind = i;
+        //        }
+        //    }
+        //    new_color = colors[min_ind];
+        //    return new_color;
+        //}
     }
 }
