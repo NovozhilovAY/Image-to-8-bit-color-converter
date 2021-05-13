@@ -26,7 +26,8 @@ namespace Image_to_8_bit_color_converter
         private Bitmap[] images;
         private Bitmap cur_image;
         private bool IsImageLoaded;
-        
+
+        private Palette cur_palette;
         public Form1()
         {
             InitializeComponent();
@@ -44,6 +45,7 @@ namespace Image_to_8_bit_color_converter
             //paletteFromFile = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\ufo32.png");
             //paletteFromFile2 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\ufo128.png");
             paletteFromFile3 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\test images\\wave.jpg");
+            cur_palette = p12b;
             trackBar1.Maximum = MAX_PIXEL_SIZE;
             button1.Enabled = false;
             trackBar1.Enabled = false;
@@ -51,6 +53,7 @@ namespace Image_to_8_bit_color_converter
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Disable_GUI();
             backgroundWorker2.RunWorkerAsync();
         }
 
@@ -134,13 +137,14 @@ namespace Image_to_8_bit_color_converter
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             ImageToPaletteConverter converter = new ImageToPaletteConverter();
-            converter.Convert(cur_image, paletteFromFile3,backgroundWorker2);
+            converter.Convert(cur_image, cur_palette,backgroundWorker2);
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pictureBox1.Image = cur_image;
             progressBar1.Value = 0;
+            Enable_GUI();
         }
 
         private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
