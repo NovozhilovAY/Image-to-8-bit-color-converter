@@ -14,21 +14,13 @@ namespace Image_to_8_bit_color_converter
     public partial class Form1 : Form
     {
         const int MAX_PIXEL_SIZE = 16;
-        private Palette p8b;
-        private Palette p12b;
-        private Palette p16b;
-        private Palette p6b;
-        private Palette paletteFromFile;
-        private Palette paletteFromFile2;
-        private Palette paletteFromFile3;
+
         private Pixelizer pixelizer;
         private List<Task> tasks; 
         private Bitmap[] images;
         private Bitmap cur_image;
         private Form result_form;
         private bool IsResultFormLoaded;
-        private bool IsImageLoaded;
-
         private Palette cur_palette;
         public Form1()
         {
@@ -40,14 +32,7 @@ namespace Image_to_8_bit_color_converter
             images = new Bitmap[MAX_PIXEL_SIZE];
             tasks = new List<Task>();
             pixelizer = new Pixelizer();
-            p8b = new Palette8bit();
-            p12b = new Palette12bit();
-            p16b = new Palette16bit();
-            p6b = new Palette6bit();
-            //paletteFromFile = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\ufo32.png");
-            //paletteFromFile2 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\ufo128.png");
-            paletteFromFile3 = new PaletteFromFile("C:\\Users\\sasha\\source\\repos\\Image to 8-bit color converter\\test images\\wave.jpg");
-            cur_palette = p12b;
+            cur_palette = new Palette8bit();
             trackBar1.Maximum = MAX_PIXEL_SIZE;
             button1.Enabled = false;
             trackBar1.Enabled = false;
@@ -62,7 +47,7 @@ namespace Image_to_8_bit_color_converter
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             pictureBox1.Image = images[trackBar1.Value-1];
-            cur_image = images[trackBar1.Value - 1];
+            cur_image = new Bitmap(images[trackBar1.Value - 1]);
         }
 
         public void pixelize_image(Bitmap orig,int pos, int pixel_size)
@@ -149,6 +134,7 @@ namespace Image_to_8_bit_color_converter
                 result_form.Close();
             }
             result_form = new Form2(cur_image);
+            cur_image = new Bitmap(images[trackBar1.Value - 1]);
             result_form.Show();
             IsResultFormLoaded = true;
             progressBar1.Value = 0;
@@ -158,6 +144,26 @@ namespace Image_to_8_bit_color_converter
         private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void p6bToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cur_palette = new Palette6bit();
+        }
+
+        private void p8bToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            cur_palette = new Palette8bit();
+        }
+
+        private void p12ToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            cur_palette = new Palette12bit();
+        }
+
+        private void p16bToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            cur_palette = new Palette16bit();
         }
     }
 }
