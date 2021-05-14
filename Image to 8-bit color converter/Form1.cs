@@ -25,6 +25,8 @@ namespace Image_to_8_bit_color_converter
         private List<Task> tasks; 
         private Bitmap[] images;
         private Bitmap cur_image;
+        private Form result_form;
+        private bool IsResultFormLoaded;
         private bool IsImageLoaded;
 
         private Palette cur_palette;
@@ -142,7 +144,13 @@ namespace Image_to_8_bit_color_converter
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            pictureBox1.Image = cur_image;
+            if(IsResultFormLoaded)
+            {
+                result_form.Close();
+            }
+            result_form = new Form2(cur_image);
+            result_form.Show();
+            IsResultFormLoaded = true;
             progressBar1.Value = 0;
             Enable_GUI();
         }
