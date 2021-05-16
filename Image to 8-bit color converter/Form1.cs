@@ -13,6 +13,7 @@ namespace Image_to_8_bit_color_converter
     
     public partial class Form1 : Form
     {
+        enum CurP{p6b, p8b, p12b, p16b };
         const int MAX_PIXEL_SIZE = 16;
 
         private Pixelizer pixelizer;
@@ -22,6 +23,8 @@ namespace Image_to_8_bit_color_converter
         private Form result_form;
         private bool IsResultFormLoaded;
         private Palette cur_palette;
+
+        CurP cur_p;
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +36,7 @@ namespace Image_to_8_bit_color_converter
             tasks = new List<Task>();
             pixelizer = new Pixelizer();
             cur_palette = new Palette8bit();
+            cur_p = CurP.p8b;
             trackBar1.Maximum = MAX_PIXEL_SIZE;
             button1.Enabled = false;
             trackBar1.Enabled = false;
@@ -48,6 +52,7 @@ namespace Image_to_8_bit_color_converter
         {
             pictureBox1.Image = images[trackBar1.Value-1];
             cur_image = new Bitmap(images[trackBar1.Value - 1]);
+            UpdateTitle();
         }
 
         public void pixelize_image(Bitmap orig,int pos, int pixel_size)
@@ -64,6 +69,7 @@ namespace Image_to_8_bit_color_converter
                 images[0] = cur_image;
                 Disable_GUI();
                 backgroundWorker1.RunWorkerAsync();
+                UpdateTitle();
             }
         }
 
@@ -149,21 +155,51 @@ namespace Image_to_8_bit_color_converter
         private void p6bToolStripMenuItem_Click(object sender, EventArgs e)
         {
             cur_palette = new Palette6bit();
+            cur_p = CurP.p6b;
+            UpdateTitle();
         }
 
         private void p8bToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             cur_palette = new Palette8bit();
+            cur_p = CurP.p8b;
+            UpdateTitle();
         }
 
         private void p12ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             cur_palette = new Palette12bit();
+            cur_p = CurP.p12b;
+            UpdateTitle();
         }
 
         private void p16bToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             cur_palette = new Palette16bit();
+            cur_p = CurP.p16b;
+            UpdateTitle();
         }
+        private void UpdateTitle()
+        {
+            string title = "Size:" + cur_image.Width.ToString() + "x" + cur_image.Height.ToString() + "   ";
+            title += "Pixel size:" + trackBar1.Value.ToString() + "   ";
+            switch(cur_p)
+            {
+                case CurP.p6b:
+                    title += " Palette:6 bit";
+                    break;
+                case CurP.p8b:
+                    title += " Palette:8 bit";
+                    break;
+                case CurP.p12b:
+                    title += " Palette:12 bit";
+                    break;
+                case CurP.p16b:
+                    title += " Palette:16 bit";
+                    break;
+            }
+            Text = title;
+        }
+
     }
 }
