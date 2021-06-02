@@ -57,7 +57,7 @@ namespace Image_to_8_bit_color_converter
 
         public void pixelize_image(Bitmap orig,int pos, int pixel_size)
         {
-           images[pos] = pixelizer.process(orig, pixel_size); 
+            images[pos] = pixelizer.process(orig, pixel_size);
         }
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -65,12 +65,23 @@ namespace Image_to_8_bit_color_converter
             d.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
             if (d.ShowDialog() == DialogResult.OK)
             {
-                cur_image = (Bitmap)Image.FromFile(d.FileName);
+                Bitmap image = (Bitmap)Image.FromFile(d.FileName);
+                image = GetCopyWith32bppArgbPixelFormat(image);
+                cur_image = image;
                 images[0] = cur_image;
                 Disable_GUI();
                 backgroundWorker1.RunWorkerAsync();
                 UpdateTitle();
             }
+        }
+        private Bitmap GetCopyWith32bppArgbPixelFormat(Bitmap _image)
+        {
+            if(_image.PixelFormat != System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+            {
+                Bitmap new_image = _image.Clone(new Rectangle(0, 0, _image.Width, _image.Height), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                _image = new_image;
+            }
+            return _image;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
