@@ -11,7 +11,9 @@ namespace Image_to_8_bit_color_converter
     {
         public Bitmap process(Bitmap image,int p_size)
         {
-            Bitmap res = new Bitmap(image, new Size(image.Width, image.Height));
+            Bitmap res = new Bitmap(image);
+            FastBitmap fast_res = new FastBitmap(res);
+            fast_res.Lock();
             List<Color> one_pixel_colors = new List<Color>();
             
             for(int y = 0; y < image.Height; y += p_size)
@@ -31,7 +33,7 @@ namespace Image_to_8_bit_color_converter
                            {
                                 break;
                            }
-                           one_pixel_colors.Add(image.GetPixel(j, i));
+                           one_pixel_colors.Add(fast_res.GetPixel(j, i));
                         }
                     }
                     Color new_color = get_avr_color(one_pixel_colors);
@@ -47,11 +49,12 @@ namespace Image_to_8_bit_color_converter
                             {
                                 break;
                             }
-                            res.SetPixel(j, i,new_color);
+                            fast_res.SetPixel(j, i,new_color);
                         }
                     }
                 }
             }
+            fast_res.Unlock();
             return res;
         }
 
