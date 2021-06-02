@@ -71,6 +71,8 @@ namespace Image_to_8_bit_color_converter
 
         private void Fill_rows_of_colors(Bitmap image)
         {
+            FastBitmap fb = new FastBitmap(image);
+            fb.Lock();
             rows_of_colors = new List<List<Color>>(image.Height);
             for (int i = 0; i < image.Height; i++)
             {
@@ -81,9 +83,10 @@ namespace Image_to_8_bit_color_converter
                 rows_of_colors[i] = new List<Color>(image.Width);
                 for (int j = 0; j < image.Width; j++)
                 {
-                    rows_of_colors[i].Add(image.GetPixel(j, i));
+                    rows_of_colors[i].Add(fb.GetPixel(j, i));
                 }
             }
+            fb.Unlock();
         }
         private void Process_row(List<Color> row)
         {
@@ -108,13 +111,16 @@ namespace Image_to_8_bit_color_converter
 
         private void Set_new_colors(Bitmap image)
         {
+            FastBitmap fb = new FastBitmap(image);
+            fb.Lock();
             for (int y = 0; y < image.Height; y++)
             {
                 for (int x = 0; x < image.Width; x++)
                 {
-                    image.SetPixel(x, y, rows_of_colors[y][x]);
+                    fb.SetPixel(x, y, rows_of_colors[y][x]);
                 }
             }
+            fb.Unlock();
         }
 
         private Color Get_similar_color_from_palette(Color color)

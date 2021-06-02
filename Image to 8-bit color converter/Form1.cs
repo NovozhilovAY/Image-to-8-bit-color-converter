@@ -68,7 +68,7 @@ namespace Image_to_8_bit_color_converter
                 Bitmap image = (Bitmap)Image.FromFile(d.FileName);
                 image = GetCopyWith32bppArgbPixelFormat(image);
                 cur_image = image;
-                images[0] = cur_image;
+                images[0] = new Bitmap(cur_image);
                 Disable_GUI();
                 backgroundWorker1.RunWorkerAsync();
                 UpdateTitle();
@@ -104,7 +104,7 @@ namespace Image_to_8_bit_color_converter
                 Task.WaitAll(tasks.ToArray());
                 tasks.Clear();
             }
-            pictureBox1.Image = cur_image;
+            pictureBox1.Image = new Bitmap(cur_image);
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
