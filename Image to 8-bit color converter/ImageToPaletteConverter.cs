@@ -17,8 +17,9 @@ namespace Image_to_8_bit_color_converter
         private int[] G_vals;
         private int[] B_vals;
         private List<Task> tasks;
-        public void Convert(Bitmap image, Palette _palette)
+        public Bitmap Convert(Bitmap _image, Palette _palette)
         {
+            Bitmap image = new Bitmap(_image);
             colors = _palette.get_colors();
             R_vals = _palette.Get_R();
             G_vals = _palette.Get_G();
@@ -41,9 +42,11 @@ namespace Image_to_8_bit_color_converter
                 Task.WaitAll(tasks.ToArray());
             }
             Set_new_colors(image);
+            return image;
         }
-        public void Convert(Bitmap image, Palette _palette, BackgroundWorker bw)
+        public Bitmap Convert(Bitmap _image, Palette _palette, BackgroundWorker bw)
         {
+            Bitmap image = new Bitmap(_image);
             colors = _palette.get_colors();
             R_vals = _palette.Get_R();
             G_vals = _palette.Get_G();
@@ -67,6 +70,7 @@ namespace Image_to_8_bit_color_converter
                 Task.WaitAll(tasks.ToArray());
             }
             Set_new_colors(image);
+            return image;
         }
 
         private void Fill_rows_of_colors(Bitmap image)

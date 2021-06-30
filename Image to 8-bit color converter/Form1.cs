@@ -23,6 +23,7 @@ namespace Image_to_8_bit_color_converter
         private Form result_form;
         private bool IsResultFormLoaded;
         private Palette cur_palette;
+        private Bitmap result_image;
 
         CurP cur_p;
         public Form1()
@@ -51,7 +52,7 @@ namespace Image_to_8_bit_color_converter
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             pictureBox1.Image = images[trackBar1.Value-1];
-            cur_image = new Bitmap(images[trackBar1.Value - 1]);
+            cur_image = images[trackBar1.Value - 1];
             UpdateTitle();
         }
 
@@ -141,7 +142,7 @@ namespace Image_to_8_bit_color_converter
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             ImageToPaletteConverter converter = new ImageToPaletteConverter();
-            converter.Convert(cur_image, cur_palette,backgroundWorker2);
+            result_image = converter.Convert(cur_image, cur_palette, backgroundWorker2);
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -150,8 +151,7 @@ namespace Image_to_8_bit_color_converter
             {
                 result_form.Close();
             }
-            result_form = new Form2(cur_image);
-            cur_image = new Bitmap(images[trackBar1.Value - 1]);
+            result_form = new Form2(result_image);
             result_form.Show();
             IsResultFormLoaded = true;
             progressBar1.Value = 0;
