@@ -34,7 +34,7 @@ namespace Image_to_8_bit_color_converter
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.цветоваяПалитраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PaletteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.p6bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.p8bToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.p12bToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +103,7 @@ namespace Image_to_8_bit_color_converter
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.открытьToolStripMenuItem,
-            this.цветоваяПалитраToolStripMenuItem});
+            this.PaletteToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(808, 24);
@@ -117,16 +117,16 @@ namespace Image_to_8_bit_color_converter
             this.открытьToolStripMenuItem.Text = "Открыть";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
             // 
-            // цветоваяПалитраToolStripMenuItem
+            // PaletteToolStripMenuItem
             // 
-            this.цветоваяПалитраToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PaletteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.p6bToolStripMenuItem,
             this.p8bToolStripMenuItem1,
             this.p12bToolStripMenuItem2,
             this.p16bToolStripMenuItem3});
-            this.цветоваяПалитраToolStripMenuItem.Name = "цветоваяПалитраToolStripMenuItem";
-            this.цветоваяПалитраToolStripMenuItem.Size = new System.Drawing.Size(118, 20);
-            this.цветоваяПалитраToolStripMenuItem.Text = "Цветовая палитра";
+            this.PaletteToolStripMenuItem.Name = "PaletteToolStripMenuItem";
+            this.PaletteToolStripMenuItem.Size = new System.Drawing.Size(118, 20);
+            this.PaletteToolStripMenuItem.Text = "Цветовая палитра";
             // 
             // p6bToolStripMenuItem
             // 
@@ -295,7 +295,7 @@ namespace Image_to_8_bit_color_converter
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.ToolStripMenuItem цветоваяПалитраToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PaletteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem p6bToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem p8bToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem p12bToolStripMenuItem2;

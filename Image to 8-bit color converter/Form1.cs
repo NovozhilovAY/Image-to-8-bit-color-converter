@@ -41,6 +41,7 @@ namespace Image_to_8_bit_color_converter
             trackBar1.Maximum = MAX_PIXEL_SIZE;
             button1.Enabled = false;
             trackBar1.Enabled = false;
+            PaletteToolStripMenuItem.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -130,6 +131,7 @@ namespace Image_to_8_bit_color_converter
             menuStrip2.Enabled = true;
             button1.Enabled = true;
             trackBar1.Enabled = true;
+            PaletteToolStripMenuItem.Enabled = true;
         }
 
         private void Disable_GUI()
@@ -137,6 +139,7 @@ namespace Image_to_8_bit_color_converter
             menuStrip2.Enabled = false;
             button1.Enabled = false;
             trackBar1.Enabled = false;
+            PaletteToolStripMenuItem.Enabled = false;
         }
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
