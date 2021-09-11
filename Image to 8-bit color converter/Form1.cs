@@ -33,13 +33,12 @@ namespace Image_to_8_bit_color_converter
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            BackColor = Color.FromArgb(216, 216, 216);
             images = new Bitmap[MAX_PIXEL_SIZE];
             tasks = new List<Task>();
             pixelizer = new Pixelizer();
             cur_palette = new Palette8bit();
             cur_p = CurP.p8b;
-            //PixelSizeTrackBar.Maximum = MAX_PIXEL_SIZE;
+            PixelSizeTrackBar.Maximum = MAX_PIXEL_SIZE;
             //button1.Enabled = false;
             //PixelSizeTrackBar.Enabled = false;
             //PaletteToolStripMenuItem.Enabled = false;
