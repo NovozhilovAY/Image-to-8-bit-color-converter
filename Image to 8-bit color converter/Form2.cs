@@ -24,7 +24,7 @@ namespace Image_to_8_bit_color_converter
             pictureBox1.Image = image;
         }
 
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog savedialog = new SaveFileDialog();
             savedialog.Title = "Сохранить изображение";
