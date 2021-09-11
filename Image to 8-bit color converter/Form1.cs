@@ -13,7 +13,6 @@ namespace Image_to_8_bit_color_converter
     
     public partial class Form1 : Form
     {
-        enum CurP{p6b, p8b, p12b, p16b };
         const int MAX_PIXEL_SIZE = 16;
 
         private Pixelizer pixelizer;
@@ -24,8 +23,6 @@ namespace Image_to_8_bit_color_converter
         private bool IsResultFormLoaded;
         private Palette cur_palette;
         private Bitmap result_image;
-
-        CurP cur_p;
         public Form1()
         {
             InitializeComponent();
@@ -37,47 +34,21 @@ namespace Image_to_8_bit_color_converter
             tasks = new List<Task>();
             pixelizer = new Pixelizer();
             cur_palette = new Palette8bit();
-            cur_p = CurP.p8b;
-            trackBar1.Maximum = MAX_PIXEL_SIZE;
-            button1.Enabled = false;
-            trackBar1.Enabled = false;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Disable_GUI();
-            backgroundWorker2.RunWorkerAsync();
-        }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            pictureBox1.Image = images[trackBar1.Value-1];
-            cur_image = images[trackBar1.Value - 1];
-            UpdateTitle();
+            PixelSizeTrackBar.Maximum = MAX_PIXEL_SIZE;
+            button1.Visible = false;
+            PixelSizeTrackBar.Visible = false;
+            PaletteComboBox.Visible = false;
+            pictureBox1.Image = Image.FromFile("StartImage.png");
         }
 
         public void pixelize_image(Bitmap orig,int pos, int pixel_size)
         {
             images[pos] = pixelizer.process(orig, pixel_size);
         }
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog d = new OpenFileDialog();
-            d.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
-            if (d.ShowDialog() == DialogResult.OK)
-            {
-                Bitmap image = (Bitmap)Image.FromFile(d.FileName);
-                image = GetCopyWith32bppArgbPixelFormat(image);
-                cur_image = image;
-                images[0] = new Bitmap(cur_image);
-                Disable_GUI();
-                backgroundWorker1.RunWorkerAsync();
-                UpdateTitle();
-            }
-        }
+
         private Bitmap GetCopyWith32bppArgbPixelFormat(Bitmap _image)
         {
-            if(_image.PixelFormat != System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+            if (_image.PixelFormat != System.Drawing.Imaging.PixelFormat.Format32bppArgb)
             {
                 Bitmap new_image = _image.Clone(new Rectangle(0, 0, _image.Width, _image.Height), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
                 _image = new_image;
@@ -105,7 +76,6 @@ namespace Image_to_8_bit_color_converter
                 Task.WaitAll(tasks.ToArray());
                 tasks.Clear();
             }
-            pictureBox1.Image = new Bitmap(cur_image);
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -121,22 +91,25 @@ namespace Image_to_8_bit_color_converter
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar1.Value = 0;
-            trackBar1.Value = 1;
+            PixelSizeTrackBar.Value = 1;
+            pictureBox1.Image = new Bitmap(cur_image);
             Enable_GUI();
         }
 
         private void Enable_GUI()
         {
-            menuStrip2.Enabled = true;
-            button1.Enabled = true;
-            trackBar1.Enabled = true;
+            OpenImageButton.Enabled = true;
+            button1.Visible = true;
+            PixelSizeTrackBar.Visible = true;
+            PaletteComboBox.Visible  = true;
         }
 
         private void Disable_GUI()
         {
-            menuStrip2.Enabled = false;
-            button1.Enabled = false;
-            trackBar1.Enabled = false;
+            OpenImageButton.Enabled = false;
+            button1.Visible = false;
+            PixelSizeTrackBar.Visible = false;
+            PaletteComboBox.Visible = false;
         }
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
@@ -147,7 +120,7 @@ namespace Image_to_8_bit_color_converter
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if(IsResultFormLoaded)
+            if (IsResultFormLoaded)
             {
                 result_form.Close();
             }
@@ -162,55 +135,53 @@ namespace Image_to_8_bit_color_converter
         {
             progressBar1.Value = e.ProgressPercentage;
         }
-
-        private void p6bToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PaletteComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cur_palette = new Palette6bit();
-            cur_p = CurP.p6b;
-            UpdateTitle();
-        }
-
-        private void p8bToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            cur_palette = new Palette8bit();
-            cur_p = CurP.p8b;
-            UpdateTitle();
-        }
-
-        private void p12ToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            cur_palette = new Palette12bit();
-            cur_p = CurP.p12b;
-            UpdateTitle();
-        }
-
-        private void p16bToolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            cur_palette = new Palette16bit();
-            cur_p = CurP.p16b;
-            UpdateTitle();
-        }
-        private void UpdateTitle()
-        {
-            string title = "Size:" + cur_image.Width.ToString() + "x" + cur_image.Height.ToString() + "   ";
-            title += "Pixel size:" + trackBar1.Value.ToString() + "   ";
-            switch(cur_p)
+            switch(PaletteComboBox.SelectedIndex)
             {
-                case CurP.p6b:
-                    title += " Palette:6 bit";
+                case 0:
+                    cur_palette = new Palette6bit();
                     break;
-                case CurP.p8b:
-                    title += " Palette:8 bit";
+                case 1:
+                    cur_palette = new Palette8bit();
                     break;
-                case CurP.p12b:
-                    title += " Palette:12 bit";
+                case 2:
+                    cur_palette = new Palette12bit();
                     break;
-                case CurP.p16b:
-                    title += " Palette:16 bit";
+                case 3:
+                    cur_palette = new Palette16bit();
                     break;
             }
-            Text = title;
         }
 
+        private void OpenImageButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog d = new OpenFileDialog();
+            d.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            if (d.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap image = (Bitmap)Image.FromFile(d.FileName);
+                image = GetCopyWith32bppArgbPixelFormat(image);
+                cur_image = image;
+                images[0] = new Bitmap(cur_image);
+                Disable_GUI();
+                backgroundWorker1.RunWorkerAsync();
+                pictureBox1.Image = Image.FromFile("UploadingImage.png");
+                //UpdateTitle();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Disable_GUI();
+            backgroundWorker2.RunWorkerAsync();
+        }
+
+        private void PixelSizeTrackBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            PixelSizeTrackBar.Refresh();
+            pictureBox1.Image = images[PixelSizeTrackBar.Value - 1];
+            cur_image = images[PixelSizeTrackBar.Value - 1];
+        }
     }
 }
