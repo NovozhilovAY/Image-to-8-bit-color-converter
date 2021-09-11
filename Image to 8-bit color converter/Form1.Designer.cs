@@ -40,17 +40,16 @@ namespace Image_to_8_bit_color_converter
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.guna2ControlBox1 = new Guna.UI2.WinForms.Guna2ControlBox();
-            this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.PaletteComboBox = new Guna.UI2.WinForms.Guna2ComboBox();
             this.OpenImageButton = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.button1 = new Guna.UI2.WinForms.Guna2TileButton();
+            this.progressBar1 = new Guna.UI2.WinForms.Guna2ProgressBar();
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2ResizeForm1 = new Guna.UI2.WinForms.Guna2ResizeForm(this.components);
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.guna2ProgressBar1 = new Guna.UI2.WinForms.Guna2ProgressBar();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.PixelSizeTrackBar = new Guna.UI2.WinForms.Guna2VTrackBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.guna2TileButton1 = new Guna.UI2.WinForms.Guna2TileButton();
+            this.PixelSizeTrackBar = new Guna.UI2.WinForms.Guna2VTrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,10 +59,6 @@ namespace Image_to_8_bit_color_converter
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,7 +103,7 @@ namespace Image_to_8_bit_color_converter
             this.splitContainer1.Panel1.Controls.Add(this.guna2ControlBox3);
             this.splitContainer1.Panel1.Controls.Add(this.guna2ControlBox2);
             this.splitContainer1.Panel1.Controls.Add(this.guna2ControlBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.guna2ComboBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.PaletteComboBox);
             this.splitContainer1.Panel1.Controls.Add(this.OpenImageButton);
             this.splitContainer1.Panel1.Controls.Add(this.guna2Button1);
             this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(5);
@@ -188,49 +183,51 @@ namespace Image_to_8_bit_color_converter
             this.guna2ControlBox1.Size = new System.Drawing.Size(39, 36);
             this.guna2ControlBox1.TabIndex = 5;
             // 
-            // guna2ComboBox1
+            // PaletteComboBox
             // 
-            this.guna2ComboBox1.AutoRoundedCorners = true;
-            this.guna2ComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.guna2ComboBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.guna2ComboBox1.BorderRadius = 17;
-            this.guna2ComboBox1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-            this.guna2ComboBox1.BorderThickness = 0;
-            this.guna2ComboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.guna2ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.guna2ComboBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.guna2ComboBox1.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.guna2ComboBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.guna2ComboBox1.FocusedState.Parent = this.guna2ComboBox1;
-            this.guna2ComboBox1.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.guna2ComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.guna2ComboBox1.HoverState.Parent = this.guna2ComboBox1;
-            this.guna2ComboBox1.ItemHeight = 30;
-            this.guna2ComboBox1.Items.AddRange(new object[] {
+            this.PaletteComboBox.AutoRoundedCorners = true;
+            this.PaletteComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.PaletteComboBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.PaletteComboBox.BorderRadius = 17;
+            this.PaletteComboBox.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+            this.PaletteComboBox.BorderThickness = 0;
+            this.PaletteComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PaletteComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.PaletteComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PaletteComboBox.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.PaletteComboBox.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.PaletteComboBox.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.PaletteComboBox.FocusedState.Parent = this.PaletteComboBox;
+            this.PaletteComboBox.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.PaletteComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.PaletteComboBox.HoverState.Parent = this.PaletteComboBox;
+            this.PaletteComboBox.ItemHeight = 30;
+            this.PaletteComboBox.Items.AddRange(new object[] {
             "6 БИТ",
             "8 БИТ",
             "12 БИТ",
             "16 БИТ"});
-            this.guna2ComboBox1.ItemsAppearance.Parent = this.guna2ComboBox1;
-            this.guna2ComboBox1.Location = new System.Drawing.Point(203, 10);
-            this.guna2ComboBox1.Name = "guna2ComboBox1";
-            this.guna2ComboBox1.ShadowDecoration.Parent = this.guna2ComboBox1;
-            this.guna2ComboBox1.Size = new System.Drawing.Size(140, 36);
-            this.guna2ComboBox1.StartIndex = 0;
-            this.guna2ComboBox1.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            this.guna2ComboBox1.TabIndex = 4;
-            this.guna2ComboBox1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.PaletteComboBox.ItemsAppearance.Parent = this.PaletteComboBox;
+            this.PaletteComboBox.Location = new System.Drawing.Point(203, 10);
+            this.PaletteComboBox.Name = "PaletteComboBox";
+            this.PaletteComboBox.ShadowDecoration.Parent = this.PaletteComboBox;
+            this.PaletteComboBox.Size = new System.Drawing.Size(140, 36);
+            this.PaletteComboBox.StartIndex = 1;
+            this.PaletteComboBox.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            this.PaletteComboBox.TabIndex = 4;
+            this.PaletteComboBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.PaletteComboBox.SelectedIndexChanged += new System.EventHandler(this.PaletteComboBox_SelectedIndexChanged);
             // 
             // OpenImageButton
             // 
+            this.OpenImageButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
             this.OpenImageButton.CheckedState.Parent = this.OpenImageButton;
             this.OpenImageButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.OpenImageButton.CustomImages.Parent = this.OpenImageButton;
             this.OpenImageButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.OpenImageButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.OpenImageButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.OpenImageButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.OpenImageButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.OpenImageButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.OpenImageButton.DisabledState.Parent = this.OpenImageButton;
             this.OpenImageButton.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
             this.OpenImageButton.Font = new System.Drawing.Font("Segoe UI", 14F);
@@ -244,6 +241,7 @@ namespace Image_to_8_bit_color_converter
             this.OpenImageButton.Size = new System.Drawing.Size(140, 36);
             this.OpenImageButton.TabIndex = 1;
             this.OpenImageButton.Text = "ОТКРЫТЬ";
+            this.OpenImageButton.Click += new System.EventHandler(this.OpenImageButton_Click);
             // 
             // guna2Button1
             // 
@@ -271,17 +269,6 @@ namespace Image_to_8_bit_color_converter
             this.guna2Button1.Size = new System.Drawing.Size(890, 44);
             this.guna2Button1.TabIndex = 0;
             // 
-            // guna2DragControl1
-            // 
-            this.guna2DragControl1.DockForm = true;
-            this.guna2DragControl1.TargetControl = this.guna2Button1;
-            this.guna2DragControl1.TransparentWhileDrag = true;
-            this.guna2DragControl1.UseTransparentDrag = true;
-            // 
-            // guna2ResizeForm1
-            // 
-            this.guna2ResizeForm1.TargetForm = this;
-            // 
             // splitContainer2
             // 
             this.splitContainer2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
@@ -295,108 +282,105 @@ namespace Image_to_8_bit_color_converter
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            this.splitContainer2.Panel1.Controls.Add(this.PixelSizeTrackBar);
+            this.splitContainer2.Panel1.Controls.Add(this.pictureBox1);
             this.splitContainer2.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.guna2TileButton1);
-            this.splitContainer2.Panel2.Controls.Add(this.guna2ProgressBar1);
+            this.splitContainer2.Panel2.Controls.Add(this.button1);
+            this.splitContainer2.Panel2.Controls.Add(this.progressBar1);
             this.splitContainer2.Panel2.Padding = new System.Windows.Forms.Padding(5);
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer2.Size = new System.Drawing.Size(900, 542);
             this.splitContainer2.SplitterDistance = 488;
             this.splitContainer2.TabIndex = 0;
             // 
-            // guna2ProgressBar1
+            // button1
             // 
-            this.guna2ProgressBar1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.guna2ProgressBar1.BorderRadius = 10;
-            this.guna2ProgressBar1.BorderThickness = 1;
-            this.guna2ProgressBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2ProgressBar1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.guna2ProgressBar1.Location = new System.Drawing.Point(5, 5);
-            this.guna2ProgressBar1.Name = "guna2ProgressBar1";
-            this.guna2ProgressBar1.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(220)))), ((int)(((byte)(184)))));
-            this.guna2ProgressBar1.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(220)))), ((int)(((byte)(184)))));
-            this.guna2ProgressBar1.ShadowDecoration.Parent = this.guna2ProgressBar1;
-            this.guna2ProgressBar1.Size = new System.Drawing.Size(890, 40);
-            this.guna2ProgressBar1.TabIndex = 0;
-            this.guna2ProgressBar1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.button1.BorderRadius = 7;
+            this.button1.BorderThickness = 1;
+            this.button1.CheckedState.Parent = this.button1;
+            this.button1.CustomImages.Parent = this.button1;
+            this.button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.button1.DisabledState.Parent = this.button1;
+            this.button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.button1.HoverState.Parent = this.button1;
+            this.button1.Location = new System.Drawing.Point(384, 10);
+            this.button1.MaximumSize = new System.Drawing.Size(159, 30);
+            this.button1.MinimumSize = new System.Drawing.Size(159, 30);
+            this.button1.Name = "button1";
+            this.button1.ShadowDecoration.Color = System.Drawing.Color.DarkRed;
+            this.button1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.button1.ShadowDecoration.Parent = this.button1;
+            this.button1.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(20);
+            this.button1.Size = new System.Drawing.Size(159, 30);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "ОБРАБОТАТЬ";
+            this.button1.UseTransparentBackground = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // splitContainer3
+            // progressBar1
             // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer3.IsSplitterFixed = true;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
+            this.progressBar1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.progressBar1.BorderRadius = 10;
+            this.progressBar1.BorderThickness = 1;
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressBar1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
+            this.progressBar1.Location = new System.Drawing.Point(5, 5);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(220)))), ((int)(((byte)(184)))));
+            this.progressBar1.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(186)))), ((int)(((byte)(220)))), ((int)(((byte)(184)))));
+            this.progressBar1.ShadowDecoration.Parent = this.progressBar1;
+            this.progressBar1.Size = new System.Drawing.Size(890, 40);
+            this.progressBar1.TabIndex = 0;
+            this.progressBar1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
-            // splitContainer3.Panel1
+            // guna2DragControl1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.pictureBox1);
+            this.guna2DragControl1.DockForm = true;
+            this.guna2DragControl1.TargetControl = this.guna2Button1;
+            this.guna2DragControl1.TransparentWhileDrag = true;
+            this.guna2DragControl1.UseTransparentDrag = true;
             // 
-            // splitContainer3.Panel2
+            // guna2ResizeForm1
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.PixelSizeTrackBar);
-            this.splitContainer3.Panel2.Padding = new System.Windows.Forms.Padding(5, 50, 20, 50);
-            this.splitContainer3.Size = new System.Drawing.Size(900, 488);
-            this.splitContainer3.SplitterDistance = 841;
-            this.splitContainer3.TabIndex = 0;
-            // 
-            // PixelSizeTrackBar
-            // 
-            this.PixelSizeTrackBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PixelSizeTrackBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(239)))), ((int)(((byte)(240)))));
-            this.PixelSizeTrackBar.HoverState.Parent = this.PixelSizeTrackBar;
-            this.PixelSizeTrackBar.LargeChange = 1;
-            this.PixelSizeTrackBar.Location = new System.Drawing.Point(5, 50);
-            this.PixelSizeTrackBar.Maximum = 16;
-            this.PixelSizeTrackBar.Minimum = 1;
-            this.PixelSizeTrackBar.MouseWheelBarPartitions = 1;
-            this.PixelSizeTrackBar.Name = "PixelSizeTrackBar";
-            this.PixelSizeTrackBar.Size = new System.Drawing.Size(30, 388);
-            this.PixelSizeTrackBar.TabIndex = 0;
-            this.PixelSizeTrackBar.ThumbColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.PixelSizeTrackBar.Value = 1;
+            this.guna2ResizeForm1.TargetForm = this;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(841, 488);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.Size = new System.Drawing.Size(900, 488);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // guna2TileButton1
+            // PixelSizeTrackBar
             // 
-            this.guna2TileButton1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2TileButton1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-            this.guna2TileButton1.BorderRadius = 7;
-            this.guna2TileButton1.BorderThickness = 1;
-            this.guna2TileButton1.CheckedState.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.CustomImages.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2TileButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2TileButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2TileButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2TileButton1.DisabledState.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
-            this.guna2TileButton1.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.guna2TileButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.guna2TileButton1.HoverState.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.Location = new System.Drawing.Point(401, 10);
-            this.guna2TileButton1.Name = "guna2TileButton1";
-            this.guna2TileButton1.ShadowDecoration.Color = System.Drawing.Color.DarkRed;
-            this.guna2TileButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2TileButton1.ShadowDecoration.Parent = this.guna2TileButton1;
-            this.guna2TileButton1.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(20);
-            this.guna2TileButton1.Size = new System.Drawing.Size(159, 30);
-            this.guna2TileButton1.TabIndex = 1;
-            this.guna2TileButton1.Text = "ОБРАБОТАТЬ";
-            this.guna2TileButton1.UseTransparentBackground = true;
+            this.PixelSizeTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PixelSizeTrackBar.HoverState.Parent = this.PixelSizeTrackBar;
+            this.PixelSizeTrackBar.LargeChange = 1;
+            this.PixelSizeTrackBar.Location = new System.Drawing.Point(826, 68);
+            this.PixelSizeTrackBar.Maximum = 16;
+            this.PixelSizeTrackBar.Minimum = 1;
+            this.PixelSizeTrackBar.MouseWheelBarPartitions = 1;
+            this.PixelSizeTrackBar.Name = "PixelSizeTrackBar";
+            this.PixelSizeTrackBar.Size = new System.Drawing.Size(23, 350);
+            this.PixelSizeTrackBar.TabIndex = 1;
+            this.PixelSizeTrackBar.ThumbColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.PixelSizeTrackBar.Value = 1;
+            this.PixelSizeTrackBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.PixelSizeTrackBar_Scroll);
             // 
             // Form1
             // 
@@ -420,11 +404,6 @@ namespace Image_to_8_bit_color_converter
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.PerformLayout();
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -438,7 +417,7 @@ namespace Image_to_8_bit_color_converter
         private System.Windows.Forms.SplitContainer splitContainer1;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button OpenImageButton;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
+        private Guna.UI2.WinForms.Guna2ComboBox PaletteComboBox;
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox1;
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox3;
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox2;
@@ -446,11 +425,10 @@ namespace Image_to_8_bit_color_converter
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private Guna.UI2.WinForms.Guna2ResizeForm guna2ResizeForm1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private Guna.UI2.WinForms.Guna2ProgressBar guna2ProgressBar1;
-        private System.Windows.Forms.SplitContainer splitContainer3;
+        private Guna.UI2.WinForms.Guna2ProgressBar progressBar1;
+        private Guna.UI2.WinForms.Guna2TileButton button1;
         private Guna.UI2.WinForms.Guna2VTrackBar PixelSizeTrackBar;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Guna.UI2.WinForms.Guna2TileButton guna2TileButton1;
     }
 }
 
