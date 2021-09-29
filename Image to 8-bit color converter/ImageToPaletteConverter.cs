@@ -153,26 +153,6 @@ namespace Image_to_8_bit_color_converter
             }
             return arr[min_ind];
         }
-        //private Color Get_similar_color_from_palette(Color color)
-        //{
-        //    Color new_color;
-        //    int R = color.R;
-        //    int G = color.G;
-        //    int B = color.B;
-        //    int min_dif = int.MaxValue;
-        //    int min_ind = 0;
-        //    for (int i = 0; i < colors.Count; i++)
-        //    {
-        //        int dif = Math.Abs(colors[i].R - R) + Math.Abs(colors[i].G - G) + Math.Abs(colors[i].B - B);
-        //        if (dif < min_dif)
-        //        {
-        //            min_dif = dif;
-        //            min_ind = i;
-        //        }
-        //    }
-        //    new_color = colors[min_ind];
-        //    return new_color;
-        //}
         private double Calc_percent(int part, int val)
         {
             return part / (val / 100.0);

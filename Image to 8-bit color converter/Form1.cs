@@ -167,7 +167,6 @@ namespace Image_to_8_bit_color_converter
                 Disable_GUI();
                 backgroundWorker1.RunWorkerAsync();
                 pictureBox1.Image = Properties.Resources.UploadingImage;
-                //UpdateTitle();
             }
         }
 
