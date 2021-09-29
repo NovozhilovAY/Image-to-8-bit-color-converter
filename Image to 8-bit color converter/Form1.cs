@@ -38,7 +38,7 @@ namespace Image_to_8_bit_color_converter
             button1.Visible = false;
             PixelSizeTrackBar.Visible = false;
             PaletteComboBox.Visible = false;
-            pictureBox1.Image = Image.FromFile("StartImage.png");
+            pictureBox1.Image = Properties.Resources.StartImage;
         }
 
         public void pixelize_image(Bitmap orig,int pos, int pixel_size)
@@ -166,8 +166,7 @@ namespace Image_to_8_bit_color_converter
                 images[0] = new Bitmap(cur_image);
                 Disable_GUI();
                 backgroundWorker1.RunWorkerAsync();
-                pictureBox1.Image = Image.FromFile("UploadingImage.png");
-                //UpdateTitle();
+                pictureBox1.Image = Properties.Resources.UploadingImage;
             }
         }
 
